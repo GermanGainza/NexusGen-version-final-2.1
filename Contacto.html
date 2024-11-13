@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <Link rel ="shortcut icon"href="https://imagizer.imageshack.com/img922/7903/4mOv1F.jpg" width="5%" height="3%" />
+    <title>Contacto - NexusGen</title>
+    <link href="est.css" rel="stylesheet">
+    <link href="pop.css" rel="stylesheet">
+    <style>
+        /* Barra de navegación */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #5f5d5d;
+            padding: 10px 0;
+        }
+        
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            font-size: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #06aa66;
+        }
+
+        .active {
+            background-color: #04AA6D;
+        }
+
+        /* Estilos del cuerpo */
+        body {
+            background-color: #ffffff;
+            font-family: Arial, Helvetica, sans-serif;
+            padding-top: 50px;
+        }
+
+        h2 {
+            color: #080808;
+        }
+
+        p {
+            font-size: 20px;
+            color: black;
+        }
+
+        /* Contenedor de la sección de contacto */
+        .contact-container {
+            background-color: #f0f0f5; /* Cambiado el color de fondo */
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilo del formulario de mensaje */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 80%; /* Reducido el ancho */
+            padding: 8px; /* Reducido el padding */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9fc; /* Fondo del campo de entrada */
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.6);
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Información de contacto */
+        .contact-info {
+            margin-bottom: 20px;
+        }
+
+        .contact-info h3 {
+            color: #080808;
+        }
+
+        .contact-info p {
+            font-size: 18px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <nav>
+        <ul>
+            <li><a class="active" href="Index Nexus 2 en clase.html">Inicio</a></li>
+            <li><a href="Novedades.html">Noticias</a></li>
+          <li><a href="Contacto.html">Contacto</a></li>
+          <li><a href="Nosotros.html">Nosotros</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección de contacto -->
+    <section style="padding: 20px;">
+        <h2>Contáctanos</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Información de Contacto</h3>
+                <p><strong>Dirección:</strong> Calle Ficticia 123, Ciudad XYZ</p>
+                <p><strong>Teléfono:</strong> 095002505</p>
+                <p><strong>Correo Electrónico:</strong> Nexusgen2024@gmail.com</p>
+            </div>
+
+            <p>¿Tienes alguna consulta o mensaje para nosotros? Completa el siguiente formulario y te responderemos a la brevedad:</p>
+
+            <form action="procesar_formulario.php" method="POST">
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono">
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Mensaje:</label>
+                    <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Enviar Mensaje</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Validación del formulario
+        document.querySelector('form').addEventListener('submit', function(e) {
+            if (!document.querySelector('#mensaje').value) {
+                alert("Por favor, completa el campo mensaje.");
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

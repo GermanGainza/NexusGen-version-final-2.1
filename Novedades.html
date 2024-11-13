@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Es una página de novedades de NexusGen">
+    <meta name="keywords" content="novedades, actualizaciones, NexusGen, noticias">
+    <link rel="shortcut icon" href="https://imagizer.imageshack.com/img922/7903/4mOv1F.jpg" />
+    <title>Novedades - NexusGen</title>
+    <link href="pop.css" rel="stylesheet">
+    <style>
+        /* Estilos del nav y la lista de navegación */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #5f5d5d;
+            padding: 10px 0;
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+        }
+        li {
+            float: left;
+            margin-right: 10px;
+        }
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            font-size: 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-decoration: none;
+        }
+        li a:hover:not(.active) {
+            background-color: #06aa66;
+        }
+        .active {
+            background-color: #04AA6D;
+        }
+        
+        /* Estilos del resto de la página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            margin: 0;
+            padding-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            background-color: #26787a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        section {
+            max-width: 800px;
+            margin: 20px;
+            padding: 20px;
+            background-color: #26787a;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        .news-item {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .news-item h3 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        .news-item p {
+            margin: 5px 0;
+        }
+        .news-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .button1 {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 12px 24px;
+            background-color: #04AA6D;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button1:hover {
+            background-color: #028a57;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a class="active" href="Index Nexus 2 en clase.html">Inicio</a></li>
+            <li><a href="Novedades.html">Noticias</a></li>
+          <li><a href="Contacto.html">Contacto</a></li>
+          <li><a href="Nosotros.html">Nosotros</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Noticias</h1>
+    </header>
+
+    <section class="news-item">
+      <h3>Nuevo juego 2024</h3>
+      <p>Estamos emocionados de anunciar el desarrollo de nuestro último juego.</p>
+      <img src="https://imagizer.imageshack.com/img922/182/PN2YVb.png" alt="Juego en Desarrollo">
+      <button onclick="siguienteEscena('Juego novela grafica Final/Juego novela grafica/index.html')" class="button1">
+        Acceder al juego
+    </button>
+    </section>
+
+    <section class="news-item">
+        <h3>Mira el desarrollo de este nuevo mini-juego</h3>
+        <p>NexusGen está desarrollando un nuevo mini-juego que superará las expectatívas.</p>
+        <img src="https://imagizer.imageshack.com/img924/4559/HWoZrQ.png" alt="Imagen de la expansión">
+        <button onclick="siguienteEscena('Avion final/AvionSuperPlus.html')" class="button1">
+            Acceder al juego
+        </button>
+    </section>
+
+    <section class="news-item">
+        <h3>Próximos Eventos y Talleres</h3>
+        <p>No te pierdas nuestros eventos de capacitación y talleres en línea para aprender a sacar el máximo provecho de nuestras soluciones tecnológicas.</p>
+        <img src="https://imagizer.imageshack.com/img923/3010/KUygkI.png" alt="Imagen de los eventos">
+    </section>
+
+    <script>
+        function siguienteEscena(url) {
+            window.open(url, '_blank'); // Abre la URL en una nueva pestaña
+        }
+    </script>
+
+</body>
+</html>
+

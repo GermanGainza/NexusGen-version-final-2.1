@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airplane Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            background-color: hsl(3, 26%, 17%);
+        }
+    </style>
+    
+</head>
+<body>
+    
+  <div>  
+   <audio src="Avion final/sape.mp3" autoplay loop></audio>
+</div>
+        
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Carga de imágenes
+        const airplaneImg = new Image();
+        airplaneImg.src = './Sin título.png'; // Reemplaza con tu imagen de avión
+
+        const obstacleImg = new Image();
+        obstacleImg.src = './nube.png'; // Reemplaza con tu imagen de obstáculo
+
+        // Variables del avión
+        let airplaneX = 50;
+        let airplaneY = canvas.height / 2;
+        let airplaneYVelocity = 0;
+        const gravity = 0.5;
+        const lift = -7;
+        let gameOver = false;
+        let victory = false;
+        let score = 0;
+
+        // Configuración de obstáculos
+        const obstacles = [
+            { x: canvas.width +140, y: canvas.height - 50 }, // Obstáculo en el suelo
+            { x: canvas.width +350, y: canvas.height - 200 }, // Obstáculo en el suelo
+            
+            { x: canvas.width +250, y: canvas.height - 50 }, // Obstáculo en el suelo
+            { x: canvas.width + 300, y: canvas.height - 350 }, // Obstáculo elevado
+            { x: canvas.width + 400, y: canvas.height - 400 }  // Otro obstáculo elevado
+        ];
+        const obstacleWidth = 50; // Ajusta al tamaño de tu imagen
+        const obstacleHeight = 50; // Ajusta al tamaño de tu imagen
+        let obstacleSpeed = 5;
+
+        // Dibuja el avión
+        function drawAirplane() {
+            ctx.drawImage(airplaneImg, airplaneX, airplaneY, 60, 40); // Ajusta el tamaño de la imagen
+        }
+
+        // Dibuja obstáculos
+        function drawObstacles() {
+            obstacles.forEach(obstacle => {
+                ctx.drawImage(obstacleImg, obstacle.x, obstacle.y, obstacleWidth, obstacleHeight);
+            });
+        }
+
+        // Actualiza la posición de los obstáculos
+        function updateObstacles() {
+            obstacles.forEach(obstacle => {
+                obstacle.x -= obstacleSpeed;
+                if (obstacle.x < -obstacleWidth) {
+                    obstacle.x = canvas.width + Math.random() * 300; // Reaparece el obstáculo fuera de pantalla
+                    score++; // Incrementa la puntuación cuando un obstáculo se sale de pantalla
+
+                    if (score >= 100) {
+                        victory = true;
+                        gameOver = true;
+                    }
+                }
+            });
+        }
+
+       // Dibuja el marcador
+       function drawScore() {
+            ctx.fillStyle = 'White';
+            ctx.font = '35px Candara';
+            ctx.fillText('Score: ' + score, 10, 30);
+            ctx.strokeStyle = 'Black'; 
+    ctx.lineWidth = 1.5; 
+    ctx.strokeText('Score: ' + score, 10, 30);
+        }
+
+        // Detección de colisiones
+        function detectCollision() {
+            obstacles.forEach(obstacle => {
+                if (
+                    airplaneX < obstacle.x + obstacleWidth &&
+                    airplaneX + 60 > obstacle.x &&
+                    airplaneY < obstacle.y + obstacleHeight &&
+                    airplaneY + 40 > obstacle.y
+                ) {
+                    gameOver = true; // Activa el estado de "Game Over"
+                }
+            });
+        }
+      
+
+
+        // Bucle del juego
+        function gameLoop() {
+            if (gameOver) {
+                if (victory) {
+                    ctx.fillStyle = 'green';
+                    ctx.font = '30px Arial';
+                    ctx.fillText('¡Victoria!', canvas.width / 2 - 70, canvas.height / 2);
+                } else {
+                    ctx.fillStyle = 'black';
+                    ctx.font = '30px Arial';
+                    ctx.fillText('Game Over', canvas.width / 2 - 70, canvas.height / 2);
+                }
+                ctx.fillText('Score: ' + score, canvas.width / 2 - 50, canvas.height / 2 + 40);
+                return;
+            }
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            drawAirplane(); // Dibuja el avión
+            drawObstacles(); // Dibuja los obstáculos
+            drawScore(); // Dibuja la puntuación
+
+            updateObstacles(); // Actualiza la posición de los obstáculos
+
+            // Física del avión
+            airplaneYVelocity += gravity;
+            airplaneY += airplaneYVelocity;
+
+            // Limitar altura del avión al canvas
+            if (airplaneY < 0) {
+                airplaneY = 0;
+                airplaneYVelocity = 0;
+            } else if (airplaneY + 40 > canvas.height) {
+                airplaneY = canvas.height - 40;
+                airplaneYVelocity = 0;
+            }
+
+            detectCollision(); // Revisa colisiones entre el avión y los obstáculos
+            requestAnimationFrame(gameLoop); // Sigue el ciclo del juego
+        }
+
+        // Control del avión
+        function control(e) {
+            if (e.keyCode === 32) { // Space key
+                airplaneYVelocity = lift; // Salto del avión
+            }
+        }
+
+        document.addEventListener('keydown', control);
+        gameLoop(); // Inicia el bucle del juego
+
+        // Incremento de la velocidad cada 5 segundos
+        let speedIncreaseInterval = 5000; // 5000 milisegundos = 5 segundos
+        let speedMultiplier = 1.1; // Incrementa la velocidad un 10% cada 5 segundos
+
+        function increaseSpeed() {
+            obstacleSpeed *= speedMultiplier; // Aumenta la velocidad de los obstáculos
+            if (!gameOver) { // Sólo si no ha acabado el juego
+                setTimeout(increaseSpeed, speedIncreaseInterval); // Llama a esta función cada 5 segundos
+            }
+        }
+
+        // Llama a la función para comenzar a incrementar la velocidad
+        setTimeout(increaseSpeed, speedIncreaseInterval);
+    </script>
+</body>
+</html>
